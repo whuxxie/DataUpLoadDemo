@@ -49,6 +49,6 @@ namespace DataUpLoadDemo.Entity
         CompanyNull = 412,//不存在该公司
 
         [Text("数据入库失败")]
-        DBInsertError = 412,//数据入库失败
+        DBInsertError = 413,//数据入库失败
     }
 }

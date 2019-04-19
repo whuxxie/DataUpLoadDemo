@@ -17,7 +17,7 @@ namespace DataUpLoadDemo.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        /// <param name="staffId"></param>
+        /// <param name="companyid"></param>
         /// <returns></returns>
         public static T Post<T>(string url, string data, string companyid)
         {
@@ -27,9 +27,9 @@ namespace DataUpLoadDemo.Common
             string timeStamp = GetTimeStamp();
             string nonce = GetRandom();
             //加入头信息
-            request.Headers.Add("staffid", companyid); //当前请求用户StaffId
+            request.Headers.Add("companyid", companyid); //当前请求用户companyid
             request.Headers.Add("timestamp", timeStamp); //发起请求时的时间戳（单位：毫秒）
-            request.Headers.Add("nonce", nonce); //发起请求时的时间戳（单位：毫秒）
+            request.Headers.Add("nonce", nonce); //随机数
             request.Headers.Add("signature", GetSignature(timeStamp, nonce, companyid, data)); //当前请求内容的数字签名
 
             //写数据
@@ -63,7 +63,7 @@ namespace DataUpLoadDemo.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="webApi"></param>
         /// <param name="queryStr"></param>
-        /// <param name="staffId"></param>
+        /// <param name="companyid"></param>
         /// <returns></returns>
         public static T Get<T>(string webApi, string query, string queryStr, string companyid, bool sign = true)
         {
@@ -71,7 +71,7 @@ namespace DataUpLoadDemo.Common
             string timeStamp = GetTimeStamp();
             string nonce = GetRandom();
             //加入头信息
-            request.Headers.Add("staffid", companyid); //当前请求用户StaffId
+            request.Headers.Add("companyid", companyid); //当前请求用户companyid
             request.Headers.Add("timestamp", timeStamp); //发起请求时的时间戳（单位：毫秒）
             request.Headers.Add("nonce", nonce); //发起请求时的时间戳（单位：毫秒）
 
@@ -119,7 +119,7 @@ namespace DataUpLoadDemo.Common
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <param name="nonce"></param>
-        /// <param name="staffId"></param>
+        /// <param name="companyid"></param>
         /// <param name="data"></param>
         /// <returns></returns>
         private static string GetSignature(string timeStamp, string nonce, string companyid, string data)
@@ -134,12 +134,16 @@ namespace DataUpLoadDemo.Common
                 }
                 else
                 {
-                    throw new Exception(resultMsg.Data.ToString());
+                    Console.WriteLine(resultMsg.ToString());
+                    return resultMsg.ToString();
+                    //throw new Exception(resultMsg.Data.ToString());
                 }
             }
             else
             {
-                throw new Exception("token为null，公司编号为：" + companyid);
+                Console.WriteLine(resultMsg.ToString());
+                return resultMsg.ToString();
+                //throw new Exception("token为null，公司编号为：" + companyid);
             }
 
             var hash = System.Security.Cryptography.MD5.Create();

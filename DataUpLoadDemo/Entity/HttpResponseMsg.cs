@@ -49,5 +49,9 @@ namespace DataUpLoadDemo.Entity
                 return null;
             }
         }
+        public override string ToString()
+        {
+            return StatusCode.ToString() + "\t" + Info + "\t" + Data.ToString();
+        }
     }
 }
