@@ -52,6 +52,7 @@
     <Compile Include="Common\EnumExtension.cs" />
     <Compile Include="Common\WebApiHelper.cs" />
     <Compile Include="Entity\data.cs" />
+    <Compile Include="Entity\equipmentstatus.cs" />
     <Compile Include="Entity\HttpResponseMsg.cs" />
     <Compile Include="Entity\monitordata.cs" />
     <Compile Include="Entity\StatusCodeEnum.cs" />
